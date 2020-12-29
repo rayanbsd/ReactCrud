@@ -44,7 +44,7 @@ class Posts extends Component {
   }
 
   render() {
-    console.log(store.getState().posts.posts);
+    
     const onSearchChange = (e) => {
       const filteredPosts = this.props.posts.filter((post) => {
         return (
