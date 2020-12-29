@@ -9,7 +9,6 @@ export const fetchPosts = () => (dispatch) => {
   fetch("http://localhost:3001/posts/", config)
     .then((res) => res.json())
     .then((posts) => {
-      console.log("in actioon", posts);
       dispatch({
         type: FETCH_POSTS,
         payload: posts,
@@ -18,7 +17,6 @@ export const fetchPosts = () => (dispatch) => {
 };
 
 export const createPost = (postData) => (dispatch) => {
-  console.log(postData)
   fetch("http://localhost:3001/posts/", {
     method: "POST",
     headers: {
@@ -45,26 +43,24 @@ export const deletePost = (id) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((post) => {
-      
       dispatch({
         type: DELETE_POST,
         payload: post,
       });
     });
 };
-export const editPost = (post,id) => (dispatch) => {
-  console.log(post,id)
+export const editPost = (post, id) => (dispatch) => {
+  console.log(post, id);
   fetch("http://localhost:3001/posts/" + id, {
     method: "PUT",
     headers: {
       "content-type": "application/json",
     },
-    
+
     body: JSON.stringify(post),
   })
     .then((res) => res.json())
     .then((post) => {
-      
       dispatch({
         type: EDIT_POST,
         payload: post,

@@ -6,12 +6,11 @@ import { connect } from "react-redux";
 import { editPost } from "../actions/postActions";
 
 class EditPost extends Component {
-  post = this.props.history.location.state.post;
   constructor(props) {
     super(props);
     this.state = {
-      title: this.post.title,
-      content: this.post.content,
+      title: this.props.history.location.state.post.title,
+      content: this.props.history.location.state.post.content,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -82,6 +81,8 @@ class EditPost extends Component {
 }
 EditPost.propTypes = {
   editPost: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default connect(null, { editPost })(EditPost);

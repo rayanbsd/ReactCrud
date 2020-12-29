@@ -9,15 +9,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActionArea from "@material-ui/core/CardActionArea";
+import TextField from "@material-ui/core/TextField";
 import PostForm from "./Postform";
-import CardMedia from '@material-ui/core/CardMedia';
 
 const useStyles = withStyles({
   root: {
     minWidth: 275,
   },
-  
+
   bullet: {
     display: "inline-block",
     margin: "0 2px",
@@ -38,51 +38,69 @@ class Posts extends Component {
     this.state = {
       title: "",
       content: "",
+      filteredPosts: [],
     };
 
     this.postDelete = this.postDelete.bind(this);
-    
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchPosts();
   }
-
+  /*  componentDidMount() {
+    this.setState({ filteredPosts: this.props.posts });
+  }*/
   postDelete(post) {
     console.log(post._id);
     this.props.deletePost(post._id);
   }
-  editPoste(post){
-    this.props.history.push('/editpost/'+post._id, {
-   
-      post: post
-    })
+  editPoste(post) {
+    this.props.history.push("/editpost/" + post._id, {
+      post: post,
+    });
+  }
+  onSearchChange(e) {
+    const filteredPosts = this.props.posts.filter((post) => {
+      return post.title.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+    this.setState({ filteredPosts: filteredPosts });
   }
 
   render() {
-
     return (
       <div>
         <PostForm />
         <h1>Posts</h1>
+        <TextField
+          id="standard-basic"
+          label="Title"
+          type="text"
+          name="title"
+          onChange={this.onSearchChange}
+        />
+
         {this.props.posts.length > 0 ? (
           this.props.posts.map((post) => (
             <div key={post._id}>
               <Card className={classes.root}>
-              <CardActionArea>
-       
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-          {post.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-          {post.content}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-       
-          
+                <CardActionArea>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {post.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {post.content}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+
                 <CardActions>
-                  <Button color="primary" onClick={()=>this.editPoste(post)}>Edit</Button>
+                  <Button color="primary" onClick={() => this.editPoste(post)}>
+                    Edit
+                  </Button>
                   <Button
                     color="secondary"
                     onClick={() => this.postDelete(post)}
@@ -90,9 +108,7 @@ class Posts extends Component {
                     Delete
                   </Button>
                 </CardActions>
-              
               </Card>
-          
             </div>
           ))
         ) : (
@@ -107,14 +123,11 @@ Posts.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   deletePost: PropTypes.func.isRequired,
   posts: PropTypes.array.isRequired,
-  
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   posts: state.posts.posts,
-  
 });
 
 export default connect(mapStateToProps, { fetchPosts, deletePost })(Posts);
-
-
