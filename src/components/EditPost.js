@@ -16,11 +16,13 @@ class EditPost extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-
-    console.log("aaa", e.target.name);
+  }
+  cancel() {
+    this.props.history.push("/posts/");
   }
 
   onSubmit(e) {
@@ -70,7 +72,7 @@ class EditPost extends Component {
           >
             Edit
           </Button>
-          <Button variant="contained" color="secondary">
+          <Button variant="contained" color="secondary" onClick={this.cancel}>
             Cancel
           </Button>
         </form>
