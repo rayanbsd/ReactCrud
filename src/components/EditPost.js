@@ -35,7 +35,7 @@ class EditPost extends Component {
     return (
       <div className="Edit">
         <h1>Edit</h1>
-        <h2>{this.props.match.params.id}</h2>
+
         <form onSubmit={this.onSubmit}>
           <TextField
             id="standard-basic"
@@ -73,7 +73,6 @@ class EditPost extends Component {
           <Button variant="contained" color="secondary">
             Cancel
           </Button>
-          <h2>dqmslkd</h2>
         </form>
       </div>
     );
