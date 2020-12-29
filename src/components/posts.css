@@ -1,0 +1,11 @@
+.search-field-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.search-field {
+  margin: 50px 0 !important;
+}
+.root {
+  min-width: 275px;
+}

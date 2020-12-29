@@ -1,4 +1,5 @@
 import { FETCH_POSTS, NEW_POST, DELETE_POST, EDIT_POST } from "./types";
+import { URL } from "./constants";
 const config = {
   headers: {
     "Content-Type": "application/json",
@@ -6,7 +7,7 @@ const config = {
   },
 };
 export const fetchPosts = () => (dispatch) => {
-  fetch("http://localhost:3001/posts/", config)
+  fetch(`${URL}posts/`, config)
     .then((res) => res.json())
     .then((posts) => {
       dispatch({
@@ -17,7 +18,7 @@ export const fetchPosts = () => (dispatch) => {
 };
 
 export const createPost = (postData) => (dispatch) => {
-  fetch("http://localhost:3001/posts/", {
+  fetch(`${URL}posts/`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -26,7 +27,6 @@ export const createPost = (postData) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((post) => {
-      console.log("in action ", post);
       dispatch({
         type: NEW_POST,
         payload: post,
@@ -34,8 +34,7 @@ export const createPost = (postData) => (dispatch) => {
     });
 };
 export const deletePost = (id) => (dispatch) => {
-  console.log(id);
-  fetch("http://localhost:3001/posts/" + id, {
+  fetch(`${URL}posts/` + id, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
@@ -50,8 +49,7 @@ export const deletePost = (id) => (dispatch) => {
     });
 };
 export const editPost = (post, id) => (dispatch) => {
-  console.log(post, id);
-  fetch("http://localhost:3001/posts/" + id, {
+  fetch(`${URL}posts/` + id, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

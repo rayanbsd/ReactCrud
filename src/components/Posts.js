@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions/postActions";
 import { deletePost } from "../actions/postActions";
-import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,25 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import TextField from "@material-ui/core/TextField";
 import PostForm from "./Postform";
-
-const useStyles = withStyles({
-  root: {
-    minWidth: 275,
-  },
-
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-const classes = useStyles;
+import store from "./../store";
+import "./posts.css";
 
 class Posts extends Component {
   constructor(props) {
@@ -40,17 +22,19 @@ class Posts extends Component {
       content: "",
       filteredPosts: [],
     };
+    store.subscribe(() => {
+      this.setState({
+        filteredPosts: store.getState().posts.posts,
+      });
+    });
 
     this.postDelete = this.postDelete.bind(this);
   }
   componentDidMount() {
     this.props.fetchPosts();
   }
-  /*  componentDidMount() {
-    this.setState({ filteredPosts: this.props.posts });
-  }*/
+
   postDelete(post) {
-    console.log(post._id);
     this.props.deletePost(post._id);
   }
   editPoste(post) {
@@ -58,30 +42,37 @@ class Posts extends Component {
       post: post,
     });
   }
-  onSearchChange(e) {
-    const filteredPosts = this.props.posts.filter((post) => {
-      return post.title.toLowerCase().includes(e.target.value.toLowerCase());
-    });
-    this.setState({ filteredPosts: filteredPosts });
-  }
 
   render() {
+    console.log(store.getState().posts.posts);
+    const onSearchChange = (e) => {
+      const filteredPosts = this.props.posts.filter((post) => {
+        return (
+          post.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
+          post.content.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+      });
+      this.setState({ filteredPosts: filteredPosts });
+    };
     return (
       <div>
         <PostForm />
         <h1>Posts</h1>
-        <TextField
-          id="standard-basic"
-          label="Title"
-          type="text"
-          name="title"
-          onChange={this.onSearchChange}
-        />
+        <div className="search-field-wrapper">
+          <TextField
+            className="search-field"
+            id="standard-basic"
+            label="Search for a post"
+            type="text"
+            name="title"
+            onChange={onSearchChange}
+          />
+        </div>
 
         {this.props.posts.length > 0 ? (
-          this.props.posts.map((post) => (
+          this.state.filteredPosts.map((post) => (
             <div key={post._id}>
-              <Card className={classes.root}>
+              <Card className="root">
                 <CardActionArea>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">

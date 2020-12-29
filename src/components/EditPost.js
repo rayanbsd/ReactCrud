@@ -21,16 +21,14 @@ class EditPost extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
   cancel() {
-    this.props.history.push("/posts/");
+    this.props.history.push("/");
   }
 
   onSubmit(e) {
     e.preventDefault();
 
-    /*   console.log(post);
-    console.log(this.props.match.params.id); */
     this.props.editPost(this.state, this.props.match.params.id);
-    this.props.history.push("/posts/");
+    this.props.history.push("/");
   }
   render() {
     return (

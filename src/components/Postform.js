@@ -36,7 +36,6 @@ class PostForm extends Component {
       title: this.state.title,
       content: this.state.content,
     };
-    console.log(post);
 
     this.props.createPost(post);
     this.setState({ title: "", content: "" });

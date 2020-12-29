@@ -8,8 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 
 import { Link } from "react-router-dom";
 
-
-
 const useStyles = withStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -27,28 +25,22 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-     
-       
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            ></IconButton>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          ></IconButton>
 
-            <Typography variant="h6" className={classes.title}>
-              <Link to="/" className="NavHome">Home</Link>
-            </Typography>
-
-            <Typography variant="h6" className={classes.title}>
-              <Link to="/posts" className="NavHome">posts</Link>
-            </Typography>
-          </Toolbar>
-        </AppBar>
-       
-     
+          <Typography variant="h6" className={classes.title}>
+            <Link to="/" className="NavHome">
+              Home
+            </Link>
+          </Typography>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }
