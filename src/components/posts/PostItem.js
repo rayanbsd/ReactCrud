@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import { withRouter } from 'react-router-dom';
 import "./Posts.css";
 
 class PostItem extends Component {
@@ -15,20 +16,22 @@ class PostItem extends Component {
     super(props);
     this.state = {};
   }
-
+ 
   render() {
+    const { post } = this.props;
     const postDelete = (post) => {
       this.props.deletePost(post._id);
     };
 
     const postEdit = (post) => {
+      console.log(this.props);
       this.props.history.push("/editpost/" + post._id, {
         post: post,
       });
     };
 
-    const { post } = this.props;
     
+
     return (
       <div>
         <div key={post._id}>
@@ -65,4 +68,4 @@ PostItem.propTypes = {
 
 const mapStateToProps = () => ({});
 
-export default connect(mapStateToProps, { deletePost })(PostItem);
+export default withRouter(connect(mapStateToProps, { deletePost })(PostItem));
