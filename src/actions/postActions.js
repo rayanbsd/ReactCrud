@@ -1,5 +1,5 @@
 import { FETCH_POSTS, NEW_POST, DELETE_POST, EDIT_POST } from "./types";
-import { URL } from "./constants";
+
 const config = {
   headers: {
     "Content-Type": "application/json",
@@ -7,7 +7,7 @@ const config = {
   },
 };
 export const fetchPosts = () => (dispatch) => {
-  fetch(`${URL}posts/`, config)
+  fetch(`${process.env.REACT_APP_URL}posts/`, config)
     .then((res) => res.json())
     .then((posts) => {
       dispatch({
@@ -18,7 +18,7 @@ export const fetchPosts = () => (dispatch) => {
 };
 
 export const createPost = (postData) => (dispatch) => {
-  fetch(`${URL}posts/`, {
+  fetch(`${process.env.REACT_APP_URL}posts/`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -34,7 +34,7 @@ export const createPost = (postData) => (dispatch) => {
     });
 };
 export const deletePost = (id) => (dispatch) => {
-  fetch(`${URL}posts/` + id, {
+  fetch(`${process.env.REACT_APP_URL}posts/` + id, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
@@ -49,7 +49,7 @@ export const deletePost = (id) => (dispatch) => {
     });
 };
 export const editPost = (post, id) => (dispatch) => {
-  fetch(`${URL}posts/` + id, {
+  fetch(`${process.env.REACT_APP_URL}posts/` + id, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

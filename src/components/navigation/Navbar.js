@@ -3,9 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-
 import IconButton from "@material-ui/core/IconButton";
-
 import { Link } from "react-router-dom";
 
 const useStyles = withStyles((theme) => ({
@@ -19,10 +17,8 @@ const useStyles = withStyles((theme) => ({
     flexGrow: 1,
   },
 }));
-
 export default function ButtonAppBar() {
   const classes = useStyles;
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,7 +29,6 @@ export default function ButtonAppBar() {
             color="inherit"
             aria-label="menu"
           ></IconButton>
-
           <Typography variant="h6" className={classes.title}>
             <Link to="/" className="NavHome">
               Home

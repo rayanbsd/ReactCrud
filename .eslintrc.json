@@ -1,7 +1,9 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es6": true,
+        "commonjs": true,
+        "node": true
     },
     "extends": [
         "eslint:recommended",
@@ -17,9 +19,80 @@
     "plugins": [
         "react"
     ],
-    "rules" : {
-        "no-console": 0,
-        "no-empty": 0,
-        "no-irregular-whitespace":0 
-      }
+    "rules": {
+        "newline-after-var": "error",
+        "newline-before-return": "error",
+        "import/newline-after-import": "error",
+        "react/jsx-props-no-spreading": 0,
+        "react-hooks/exhaustive-deps": "warn",
+        "prefer-promise-reject-errors": ["off"],
+        "react/jsx-filename-extension": ["off"],
+        "jsx-a11y/interactive-supports-focus": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "react/prop-types": ["warn"],
+        "react/no-typos": "error",
+        "no-return-assign": ["off"],
+        "import/no-cycle": [0, { "maxDepth": 3 }],
+        "react/destructuring-assignment": [0],
+        "react/require-default-props": [0],
+        "import/imports-first": "error",
+        "import/no-dynamic-require": 0,
+        "import/no-extraneous-dependencies": 0,
+        "import/no-named-as-default": 0,
+        "import/no-unresolved": 2,
+        "import/no-webpack-loader-syntax": 0,
+        "import/prefer-default-export": 0,
+        "no-unused-vars": 2,
+        "no-use-before-define": 0,
+        "prefer-template": 2,
+        "react/jsx-closing-tag-location": 0,
+        "react/forbid-prop-types": 0,
+        "react/jsx-first-prop-new-line": [2, "multiline"],
+        "react/jsx-no-target-blank": 0,
+        "react/jsx-uses-vars": 2,
+        "react/require-extension": 0,
+        "react/self-closing-comp": 1,
+        "react/sort-comp": 0,
+        "require-yield": 0,
+        "prefer-arrow/prefer-arrow-functions": [
+          "warn",
+          {
+            "disallowPrototype": true,
+            "singleReturnOnly": false,
+            "classPropertiesAllowed": false
+          }
+        ],
+        "no-underscore-dangle": "off",
+        "max-lines": ["error", 136],
+        "no-extra-parens": "error",
+        "no-return-await": "off",
+        "no-await-in-loop": "off",
+        "no-plusplus": "off",
+        "space-before-function-paren": "off",
+        "prefer-arrow-callback": ["error", { "allowNamedFunctions": false }],
+        "prefer-const": "error",
+        "prefer-destructuring": [
+          "error",
+          {
+            "VariableDeclarator": {
+              "array": false,
+              "object": true
+            },
+            "AssignmentExpression": {
+              "array": true,
+              "object": true
+            }
+          },
+          {
+            "enforceForRenamedProperties": false
+          }
+        ],
+        "no-console": "warn",
+        "no-const-assign": "error",
+        "no-var": "error",
+        "no-param-reassign": "off",
+        "arrow-parens": ["error", "as-needed"],
+        "arrow-spacing": "error"
+      },
 }

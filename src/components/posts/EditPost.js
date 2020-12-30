@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { editPost } from "../actions/postActions";
+import { editPost } from "../../actions/postActions";
 
 class EditPost extends Component {
   constructor(props) {
@@ -12,41 +12,36 @@ class EditPost extends Component {
       title: this.props.history.location.state.post.title,
       content: this.props.history.location.state.post.content,
     };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.cancel = this.cancel.bind(this);
   }
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-  cancel() {
-    this.props.history.push("/");
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-
-    this.props.editPost(this.state, this.props.match.params.id);
-    this.props.history.push("/");
-  }
+  
   render() {
+    const cancel = () => {
+      this.props.history.push("/");
+    };
+
+    const onChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value });
+    };
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+      this.props.editPost(this.state, this.props.match.params.id);
+      this.props.history.push("/");
+    };
+
     return (
       <div className="Edit">
         <h1>Edit</h1>
-
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={onSubmit}>
           <TextField
             id="standard-basic"
             label="Title"
             type="text"
             name="title"
-            onChange={this.onChange}
+            onChange={onChange}
             value={this.state.title}
           />
-
           <br />
-
           <br />
           <TextField
             id="outlined-multiline-static"
@@ -55,10 +50,9 @@ class EditPost extends Component {
             rows={4}
             variant="outlined"
             name="content"
-            onChange={this.onChange}
+            onChange={onChange}
             value={this.state.content}
           />
-
           <br />
           <br />
           <Button
@@ -69,7 +63,7 @@ class EditPost extends Component {
           >
             Edit
           </Button>
-          <Button variant="contained" color="secondary" onClick={this.cancel}>
+          <Button variant="contained" color="secondary" onClick={cancel}>
             Cancel
           </Button>
         </form>
