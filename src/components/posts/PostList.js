@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchPosts } from "../../actions/postActions";
 import { deletePost } from "../../actions/postActions";
 import TextField from "@material-ui/core/TextField";
 import PostForm from "./Postform";
 import store from "../../store";
+import {fetchPosts} from '../../actions/postActions';
 import PostItem from "./PostItem";
 import "./Posts.css";
 
@@ -15,20 +15,18 @@ class PostList extends Component {
     this.state = {
       title: "",
       content: "",
-      filteredPosts: [],
+      filteredPosts: [],  
     };
-  /*   store.subscribe(() => {
-      this.setState({
-        filteredPosts: store.getState().posts.posts,
-      });
-    }); */
-    this.setState({
-      filteredPosts: store.getState().posts.posts,
-    });
+  } 
+
+  componentDidMount(){
+    this.props.fetchPosts();
   }
 
-  componentDidMount() {
-    this.props.fetchPosts();
+  componentWillReceiveProps(props){
+    this.setState({
+      filteredPosts:props.posts
+    })
   }
 
   render() {
@@ -78,5 +76,8 @@ function mapStateToProps(state) {
     posts: state.posts.posts,
   };
 }
+
+
+
 
 export default connect(mapStateToProps, { fetchPosts, deletePost })(PostList);

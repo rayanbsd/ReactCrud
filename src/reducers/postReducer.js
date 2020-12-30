@@ -11,6 +11,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posts: action.payload,
+        
       };
     case NEW_POST:
       return {
