@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { deletePost } from "../../actions/postActions";
 import TextField from "@material-ui/core/TextField";
 import PostForm from "./Postform";
-import store from "../../store";
-import {fetchPosts} from '../../actions/postActions';
+import { fetchPosts } from "../../actions/postActions";
 import PostItem from "./PostItem";
 import "./Posts.css";
 
@@ -15,31 +14,32 @@ class PostList extends Component {
     this.state = {
       title: "",
       content: "",
-      filteredPosts: [],  
+      filteredPosts: [],
     };
-  } 
+  }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchPosts();
   }
 
-  componentWillReceiveProps(props){
+  UNSAFE_componentWillReceiveProps(props) {
     this.setState({
-      filteredPosts:props.posts
-    })
+      filteredPosts: props.posts,
+    });
   }
 
   render() {
-    const onSearchChange = (e) => {
-      const filteredPosts = this.props.posts.filter((post) => {
+    const onSearchChange = e => {
+      const filteredPosts = this.props.posts.filter(post => {
         return (
           post.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
           post.content.toLowerCase().includes(e.target.value.toLowerCase())
         );
       });
+
       this.setState({ filteredPosts: filteredPosts });
     };
-  
+
     return (
       <div>
         <PostForm />
@@ -54,11 +54,13 @@ class PostList extends Component {
             onChange={onSearchChange}
           />
         </div>
-        {this.props.posts.length > 0 ? (
-          this.state.filteredPosts.map((post) => <PostItem post={post} />)
-        ) : (
+        {this.props.posts.length > 0 ? 
+          this.state.filteredPosts.map(post => 
+            <PostItem key={post._id} post={post} />
+          )
+         : 
           <div>no posts</div>
-        )}
+        }
       </div>
     );
   }
@@ -76,8 +78,5 @@ function mapStateToProps(state) {
     posts: state.posts.posts,
   };
 }
-
-
-
 
 export default connect(mapStateToProps, { fetchPosts, deletePost })(PostList);

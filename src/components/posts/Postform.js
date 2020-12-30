@@ -6,7 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 
-const useStyles = withStyles((theme) => ({
+const useStyles = withStyles(theme => ({
   root: {
     "& > *": {
       margin: theme.spacing(1),
@@ -15,6 +15,7 @@ const useStyles = withStyles((theme) => ({
 }));
 
 const classes = useStyles;
+
 class PostForm extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +26,11 @@ class PostForm extends Component {
   }
 
   render() {
-   const onChange=(e)=> {
+   const onChange=e => {
       this.setState({ [e.target.name]: e.target.value });
     }
   
-   const onSubmit=(e) =>{
+   const onSubmit=e => {
       e.preventDefault(); 
       const post = {
         title: this.state.title,

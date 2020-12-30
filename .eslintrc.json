@@ -13,7 +13,7 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 12,
+        "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "plugins": [
@@ -22,9 +22,7 @@
     "rules": {
         "newline-after-var": "error",
         "newline-before-return": "error",
-        "import/newline-after-import": "error",
         "react/jsx-props-no-spreading": 0,
-        "react-hooks/exhaustive-deps": "warn",
         "prefer-promise-reject-errors": ["off"],
         "react/jsx-filename-extension": ["off"],
         "jsx-a11y/interactive-supports-focus": 0,
@@ -36,11 +34,9 @@
         "import/no-cycle": [0, { "maxDepth": 3 }],
         "react/destructuring-assignment": [0],
         "react/require-default-props": [0],
-        "import/imports-first": "error",
         "import/no-dynamic-require": 0,
         "import/no-extraneous-dependencies": 0,
         "import/no-named-as-default": 0,
-        "import/no-unresolved": 2,
         "import/no-webpack-loader-syntax": 0,
         "import/prefer-default-export": 0,
         "no-unused-vars": 2,
@@ -55,14 +51,6 @@
         "react/self-closing-comp": 1,
         "react/sort-comp": 0,
         "require-yield": 0,
-        "prefer-arrow/prefer-arrow-functions": [
-          "warn",
-          {
-            "disallowPrototype": true,
-            "singleReturnOnly": false,
-            "classPropertiesAllowed": false
-          }
-        ],
         "no-underscore-dangle": "off",
         "max-lines": ["error", 136],
         "no-extra-parens": "error",
@@ -94,5 +82,5 @@
         "no-param-reassign": "off",
         "arrow-parens": ["error", "as-needed"],
         "arrow-spacing": "error"
-      },
+      }
 }

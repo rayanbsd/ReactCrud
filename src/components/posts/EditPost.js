@@ -13,17 +13,17 @@ class EditPost extends Component {
       content: this.props.history.location.state.post.content,
     };
   }
-  
+
   render() {
     const cancel = () => {
       this.props.history.push("/");
     };
 
-    const onChange = (e) => {
+    const onChange = e => {
       this.setState({ [e.target.name]: e.target.value });
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = e => {
       e.preventDefault();
       this.props.editPost(this.state, this.props.match.params.id);
       this.props.history.push("/");
